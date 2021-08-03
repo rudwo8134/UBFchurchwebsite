@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.js": "/UBFchurchwebsite/static/js/main.1d11ed74.chunk.js",
+    "main.js.map": "/UBFchurchwebsite/static/js/main.1d11ed74.chunk.js.map",
+    "runtime-main.js": "/UBFchurchwebsite/static/js/runtime-main.01626e22.js",
+    "runtime-main.js.map": "/UBFchurchwebsite/static/js/runtime-main.01626e22.js.map",
+    "static/js/2.01d09048.chunk.js": "/UBFchurchwebsite/static/js/2.01d09048.chunk.js",
+    "static/js/2.01d09048.chunk.js.map": "/UBFchurchwebsite/static/js/2.01d09048.chunk.js.map",
+    "index.html": "/UBFchurchwebsite/index.html",
+    "static/js/2.01d09048.chunk.js.LICENSE.txt": "/UBFchurchwebsite/static/js/2.01d09048.chunk.js.LICENSE.txt",
+    "static/media/church5.cfbe5cf8.jpg": "/UBFchurchwebsite/static/media/church5.cfbe5cf8.jpg",
+    "static/media/news1.6e027704.jpg": "/UBFchurchwebsite/static/media/news1.6e027704.jpg",
+    "static/media/news2.7760c01e.jpg": "/UBFchurchwebsite/static/media/news2.7760c01e.jpg",
+    "static/media/news3.e5a95689.jpg": "/UBFchurchwebsite/static/media/news3.e5a95689.jpg",
+    "static/media/news4.b210a5d3.jpg": "/UBFchurchwebsite/static/media/news4.b210a5d3.jpg",
+    "static/media/ubf.d4017dac.png": "/UBFchurchwebsite/static/media/ubf.d4017dac.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.01626e22.js",
+    "static/js/2.01d09048.chunk.js",
+    "static/js/main.1d11ed74.chunk.js"
+  ]
+}
