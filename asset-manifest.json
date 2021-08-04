@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/UBFchurchwebsite/static/js/main.9eba2f52.chunk.js",
-    "main.js.map": "/UBFchurchwebsite/static/js/main.9eba2f52.chunk.js.map",
+    "main.js": "/UBFchurchwebsite/static/js/main.d27864d0.chunk.js",
+    "main.js.map": "/UBFchurchwebsite/static/js/main.d27864d0.chunk.js.map",
     "runtime-main.js": "/UBFchurchwebsite/static/js/runtime-main.01626e22.js",
     "runtime-main.js.map": "/UBFchurchwebsite/static/js/runtime-main.01626e22.js.map",
-    "static/js/2.7539b8aa.chunk.js": "/UBFchurchwebsite/static/js/2.7539b8aa.chunk.js",
-    "static/js/2.7539b8aa.chunk.js.map": "/UBFchurchwebsite/static/js/2.7539b8aa.chunk.js.map",
+    "static/js/2.24861794.chunk.js": "/UBFchurchwebsite/static/js/2.24861794.chunk.js",
+    "static/js/2.24861794.chunk.js.map": "/UBFchurchwebsite/static/js/2.24861794.chunk.js.map",
     "index.html": "/UBFchurchwebsite/index.html",
-    "static/js/2.7539b8aa.chunk.js.LICENSE.txt": "/UBFchurchwebsite/static/js/2.7539b8aa.chunk.js.LICENSE.txt",
+    "static/js/2.24861794.chunk.js.LICENSE.txt": "/UBFchurchwebsite/static/js/2.24861794.chunk.js.LICENSE.txt",
     "static/media/church1.e0411639.jpg": "/UBFchurchwebsite/static/media/church1.e0411639.jpg",
     "static/media/church5.cfbe5cf8.jpg": "/UBFchurchwebsite/static/media/church5.cfbe5cf8.jpg",
     "static/media/church7.6596f34c.jpg": "/UBFchurchwebsite/static/media/church7.6596f34c.jpg",
@@ -19,7 +19,7 @@
   },
   "entrypoints": [
     "static/js/runtime-main.01626e22.js",
-    "static/js/2.7539b8aa.chunk.js",
-    "static/js/main.9eba2f52.chunk.js"
+    "static/js/2.24861794.chunk.js",
+    "static/js/main.d27864d0.chunk.js"
   ]
 }
