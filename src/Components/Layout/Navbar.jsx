@@ -164,8 +164,7 @@ const Logouttext = styled.span`
 
 
 const Navbar = (props) => {
-    const { currentUser, username, signout } = props;
-    console.log(username);
+    const { currentUser, signout } = props;
     const { NavMainName, NavSubName, NavAddress, NavMenu } = Data;
     const [navbar, setnavbar] = useState(false)
 

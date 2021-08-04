@@ -24,7 +24,11 @@ export function* getSnapshotFromuserauth(userauth, additionalData){
   try{
     const userRef =yield call (createUserProfileDocument, userauth, additionalData)
     const userSnapshot = yield userRef.get()
-    yield put(SignInSuccess({id:userSnapshot.id, displayName:userauth.displayName, email:userauth.email, ...userSnapshot.data()}))
+    var display = userauth.displayName
+    if(!userauth.displayName){
+      display= additionalData.displayName
+    }
+    yield put(SignInSuccess({id:userSnapshot.id, displayName:display, email:userauth.email, ...userSnapshot.data()}))
   }catch(error){
     yield put(SignInfailure(error));
   }
@@ -40,6 +44,19 @@ export function*Signinwithgoogleprovider(){
 
 }
 
+export function* Signup({ payload: { email, password, displayName } }) {
+  try {
+    const { user } = yield auth.createUserWithEmailAndPassword(email, password);
+    yield put(signupSuccess({ user, additionalData: { displayName: displayName } }));
+  } catch (error) {
+    yield put(signupFailure(error));
+  }
+}
+
+export function* signinafter({ payload: { user, additionalData } }) {
+  yield getSnapshotFromuserauth(user, additionalData);
+}
+
 export function* signout() {
   try {
     yield auth.signOut();
@@ -52,6 +69,12 @@ export function* signout() {
 export function* OnGoogleSignInStart(){
   yield takeLatest (action.GOOGLE_SIGN_IN_START, Signinwithgoogleprovider)
 }
+export function*SignUpStart(){
+  yield takeLatest (action.CREATE_USER_START, Signup)
+}
+export function* signupsuccess() {
+  yield takeLatest(action.CREATE_USER_SUCCESS, signinafter);
+}
 
 export function* SignOutStart() {
   yield takeLatest(action.SIGN_OUT_START, signout);
@@ -60,6 +83,8 @@ export function* SignOutStart() {
 export function*userSagas(){
   yield all ([
     call(OnGoogleSignInStart),
-    call(SignOutStart)
+    call(SignOutStart),
+    call(SignUpStart),
+    call(signupsuccess),
   ])
 }

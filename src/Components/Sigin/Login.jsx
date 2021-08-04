@@ -114,13 +114,15 @@ const Loginformcontainer = styled.div`
     input {
       border: none;
       border-radius: 30px;
+      width: 30rem;
+      height: 3rem;
       text-align: center;
       padding: 0.5rem 0.25rem;
       letter-spacing: 0.1rem;
     }
   }
   button {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     background: #d98723;
     border: none;
     padding: 0.5rem 5rem;
@@ -169,10 +171,10 @@ const Login = (props) => {
           <Loginformcontainer>
             <h1>Sign In</h1>
             <div>
-              <label htmlFor="username">
+              <label htmlFor="Email">
                 <FaUserCircle />
               </label>
-              <input type="text" name="username" placeholder="UserName" />
+              <input type="email" name="Email" placeholder="Email" />
             </div>
             <div>
               <label htmlFor="password">

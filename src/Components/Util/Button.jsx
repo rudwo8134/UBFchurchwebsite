@@ -24,7 +24,7 @@ const Buttona = styled(Link)`
   user-select: none;
   line-height: 40px;
   height: 4rem;
-  letter-spacing: ${({ big }) => (big ? '0.2rem' : '0.02rem')};
+  letter-spacing: ${({ big }) => (big ? '0.4rem' : '0.02rem')};
 
   width: ${({ big }) => (big ? '16rem' : '12rem')};
   transition: all 0.3s ease-in-out;
@@ -37,7 +37,10 @@ const Buttona = styled(Link)`
 `;
 const Textcontainer = styled.span`
   margin: 0 auto;
-  font-size: ${({ big }) => (big ? '2.4rem' : '1.8rem')};
+  font-size: ${({ big }) => (big ? '1.9rem' : '1.8rem')};
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
 `;
 const Arrow = styled(AiOutlineArrowRight)`

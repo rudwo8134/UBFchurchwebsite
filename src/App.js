@@ -11,6 +11,7 @@ import Signin from "./Pages/Signin";
 import { createStructuredSelector } from "reselect";
 import {selectCurrentUser} from './Redux/User/User.selector'
 import { connect } from "react-redux";
+import Signup from "./Pages/Signup";
 function App(props) {
   const {currentUser} = props
   console.log(currentUser)
@@ -23,7 +24,14 @@ function App(props) {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route exact path="/Sign-in" render={()=> !currentUser ? (<Signin/>): (<Redirect to="/"/>)}/>
+        <Route exact path="/register">
+          <Signup/>
+        </Route>
+        <Route
+          exact
+          path="/Sign-in"
+          render={() => (!currentUser ? <Signin /> : <Redirect to="/" />)}
+        />
       </Switch>
     </Fragment>
   );

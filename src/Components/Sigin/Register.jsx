@@ -1,15 +1,15 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import image from '../../source/church7.jpg';
+import image from '../../source/church1.jpg';
 import Logo from '../../source/logo2.png';
-import { FcGoogle } from 'react-icons/fc';
-import { FaUserCircle } from 'react-icons/fa';
-import { AiOutlineLock } from 'react-icons/ai';
+import { AiOutlineLock, AiFillLock } from 'react-icons/ai';
+import {BiUserCircle} from 'react-icons/bi'
+import {MdEmail} from 'react-icons/md'
 
 //
 import { connect } from 'react-redux';
-import { GoogleSignInStart } from '../../Redux/User/User.action';
+import { GoogleSignInStart, signupStart } from '../../Redux/User/User.action';
 
 const LoginContainer = styled.div`
   width: 100vw;
@@ -37,9 +37,11 @@ const LoginBoxLeft = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
   span {
+    position: absolute;
+    bottom:26%;
     font-size: 1.6rem;
-    margin-top: 2rem;
     a {
       text-transform: capitalize;
       font-weight: bold;
@@ -80,7 +82,7 @@ const LoginBoxRight = styled.div`
     height: 150px;
   }
 `;
-const Loginformcontainer = styled.div`
+const Loginformcontainer = styled.form`
   height: 30%;
   display: flex;
   flex-direction: column;
@@ -95,7 +97,7 @@ const Loginformcontainer = styled.div`
   }
   div {
     font-size: 3.2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
     display: flex;
     align-items: center;
     label {
@@ -111,18 +113,21 @@ const Loginformcontainer = styled.div`
     input {
       border: none;
       border-radius: 30px;
+      width: 30rem;
+      height: 3rem;
       text-align: center;
       padding: 0.5rem 0.25rem;
       letter-spacing: 0.1rem;
     }
   }
   button {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     background: #d98723;
     border: none;
     padding: 0.5rem 5rem;
     border-radius: 30px;
     margin-top: 2rem;
+    margin-left: 4rem;
     transition: all 0.3s ease-in-out;
     &:hover {
       background: black;
@@ -130,72 +135,96 @@ const Loginformcontainer = styled.div`
     }
   }
 `;
-const LoginGooglecontainer = styled.div`
-  margin-top: 1rem;
-  border-top: 0.3rem dotted #33333377;
-  border-bottom: 0.3rem dotted #33333377;
-  width: 50%;
-  height: 10%;
-  text-align: center;
-  h1 {
-    font-size: 1.8rem;
-    text-align: center;
-    color: #333333aa;
-  }
-`;
-const Googlemark = styled(FcGoogle)`
-  font-size: 5rem;
-  margin-top: 1rem;
-  background: white;
-  border-radius: 50%;
-  transition: all 0.3 ease-in-out;
-  &:hover {
-    transform: scale(1.06) rotate(-3deg);
-    background: #1963ab;
-  }
-`;
+
+
 
 const Register = (props) => {
-  const { GoogleSignInStart } = props;
+  const {SignupStart} = props
+  const [Usercredential, Setusercredential] = useState({
+    email: '',
+    confirmpassword: '',
+    password: '',
+    displayName: '',
+  });
+  const handleChange = (e) =>{
+    const {name, value} = e.target
+    Setusercredential({ ...Usercredential, [name]: value});
+  }
+  
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const { displayName, email, password, confirmpassword } = Usercredential;
+  if (password !== confirmpassword) {
+    alert('password does not match! Try again');
+    return;
+  }
+  SignupStart({
+    email,
+    password,
+    displayName,
+  });
+};
+
   return (
     <LoginContainer>
       <Loginbox>
+        <LoginBoxRight>
+          <img src={Logo} alt="ubf" />
+        </LoginBoxRight>
         <LoginBoxLeft>
-          <Loginformcontainer>
-            <h1>Sign In</h1>
+          <Loginformcontainer onSubmit={handleSubmit}>
+            <h1>Sign Up</h1>
             <div>
-              <label htmlFor="username">
-                <FaUserCircle />
+              <label htmlFor="displayName">
+                <BiUserCircle />
               </label>
-              <input type="text" name="username" placeholder="UserName" />
+              <input
+                onChange={handleChange}
+                type="text"
+                name="displayName"
+                value={Usercredential.displayName}
+                placeholder="Full Name"
+              />
+            </div>
+            <div>
+              <label htmlFor="email">
+                <MdEmail />
+              </label>
+              <input onChange={handleChange} value={Usercredential.email} type="email" name="email" placeholder="E-mail" />
             </div>
             <div>
               <label htmlFor="password">
                 <AiOutlineLock />
               </label>
-              <input type="password" name="password" placeholder="Password" />
+              <input onChange={handleChange} value={Usercredential.password} type="password" name="password" placeholder="Password" />
             </div>
-            <button type="submit">Login</button>
+            <div>
+              <label htmlFor="confirmpassword">
+                <AiFillLock />
+              </label>
+              <input
+                onChange={handleChange}
+                value={Usercredential.confirmpassword}
+                type="password"
+                name="confirmpassword"
+                placeholder="Confirm Password"
+              />
+            </div>
+            <button type="submit">Register</button>
           </Loginformcontainer>
-          <LoginGooglecontainer>
-            <h1>Login with </h1>
-            <Googlemark onClick={GoogleSignInStart}></Googlemark>
-          </LoginGooglecontainer>
           <span>
-            If You don't have an account Click to{' '}
-            <Link to="/register">Register</Link>
+            If You already have an account Click to{' '}
+            <Link to="/Sign-in">Sign-in</Link>
           </span>
         </LoginBoxLeft>
-        <LoginBoxRight>
-          <img src={Logo} alt="ubf" />
-        </LoginBoxRight>
       </Loginbox>
     </LoginContainer>
   );
 };
 
 const MapAction = (dispatch) => ({
-  GoogleSignInStart: () => dispatch(GoogleSignInStart()),
+  SignupStart: (info) => dispatch(signupStart(info)),
 });
+
 
 export default connect(null, MapAction)(Register);
