@@ -126,7 +126,7 @@ const InfoBookRight = styled.div`
   border-left: 1px solid black;
 `;
 
-const InfoBookName = styled.p`
+const InfoBookName = styled.div`
   padding: 3rem;
   display: flex;
   justify-content: center;

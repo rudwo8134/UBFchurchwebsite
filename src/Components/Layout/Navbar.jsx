@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react'
+import React,{useState} from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
@@ -130,7 +130,7 @@ const Navbar = () => {
     <Navbarnav navbar={navbar}>
       <NavbarContainer>
         <NavbarLogoContainer>
-          <NavbarContainerLink>
+          <NavbarContainerLink to="/">
             {NavMainName}{' '}
             <span>
               <h4>{NavSubName}</h4>
@@ -148,8 +148,8 @@ const Navbar = () => {
           })}
         </NavbarMenucontainer>
         <NavbarContactcontainer>
-          <Button button="true" link="/contact">
-            contact us
+          <Button button="true" link="/Sign-in">
+            Sign-In
           </Button>
         </NavbarContactcontainer>
       </NavbarContainer>

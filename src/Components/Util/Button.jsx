@@ -12,7 +12,7 @@ const arrowanimation = keyframes`
   }
 `;
 
-const Buttona = styled.a`
+const Buttona = styled(Link)`
   text-decoration: none;
   font-weight: 500;
   text-transform: capitalize;
@@ -57,7 +57,7 @@ const Button = (props) => {
   const {children, button, link, big, Hero} = props
   if (button){
     return (
-      <Buttona href={`${link}`} big={big}>
+      <Buttona to={`${link}`} big={big}>
         <Textcontainer big={big}>
           {children}
           {Hero && (<Arrow/>)}
@@ -66,7 +66,7 @@ const Button = (props) => {
     );
   }
   return (
-    <Link to={link && link} big={big}>
+    <Link to={`${link}`} big={big}>
       <Textcontainer big={big}>
         {children}
         {Hero && <Arrow />}

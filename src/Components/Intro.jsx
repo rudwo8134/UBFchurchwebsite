@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled,{css} from 'styled-components'
 import { newsdata } from '../Data/intro'
-import {IoMdArrowRoundForward} from 'react-icons/io'
 import { IoArrowForward,IoArrowBack } from 'react-icons/io5';
 
 const IntroWrapper = styled.div`

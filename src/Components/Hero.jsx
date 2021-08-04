@@ -1,7 +1,10 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import styled from 'styled-components'
 import Image from '../source/church5.jpg'
 import Button from './Util/Button';
+import { biblename } from '../Data/hero';
+import axios from 'axios';
+
 
 
 const HeroContainer = styled.div`
@@ -47,6 +50,7 @@ const HeroContentsBox = styled.div`
     color: #0d0d0d99;
     margin-top: 3rem;
     margin-bottom: 6rem;
+    text-transform: capitalize;
   }
   h1 {
     font-size: 7.2rem;
@@ -54,6 +58,7 @@ const HeroContentsBox = styled.div`
     margin-bottom: 6rem;
     color: #0d0d0d;
     font-weight: bold;
+    text-transform: capitalize;
   }
   p {
     font-size: 2.2rem;
@@ -62,7 +67,7 @@ const HeroContentsBox = styled.div`
     font-family: 400;
     width: 60rem;
   }
-`
+`;
 const Smoothwrapper = styled.div`
   position: absolute;
   top:  90%;
@@ -86,16 +91,40 @@ const Smoothwrapper = styled.div`
 
 
 const Hero = () => {
+  const [verse, Setverse] = useState()
+  const [num, Setnum]= useState()
+
+  
+  useEffect(() => {
+    const random = Math.floor(Math.random() * 8) + 1;
+    const random2 = Math.floor(Math.random() * 21) + 1;
+    const random3 = Math.floor(Math.random() * 5) + 1;
+    const random4 = random3 + 1;
+
+    axios
+      .get(
+        `https://bible-api.com/${biblename[random2]}+${random}:${random3}-${random4}`
+      )
+      .then((request) => {
+        Setnum(request.data.reference);
+        Setverse(
+          `${request.data.verses[0].text} ${request.data.verses[1].text}`
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <HeroContainer>
       <HeroContentsBox>
         <h1>University Bible Fellowship</h1>
         <p>
-          For everyone who asks receives; the one who seeks finds; and to the
-          one who knocks, the door will be opened.
+          {verse && verse}
         </p>
-        <h2>Mattew 7:8</h2>
-        <Button big button="true" Hero>Let's Start</Button>
+        <h2>{num && num}</h2>
+        <Button big="true" button="true" Hero="true">Let's Start</Button>
       </HeroContentsBox>
       <Smoothwrapper/>
     </HeroContainer>

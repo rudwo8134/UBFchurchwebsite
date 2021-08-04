@@ -1,7 +1,7 @@
 export const Data = {
-  NavMainName:"U.B.F",
-  NavSubName:"Univercity Bible FellowShip",
-  NavAddress:"Scarborugh",
+  NavMainName: 'U.B.F',
+  NavSubName: 'Univercity Bible FellowShip',
+  NavAddress: 'Scarborugh',
   NavMenu: [
     {
       name: 'Mission Statement',
@@ -17,7 +17,7 @@ export const Data = {
     },
     {
       name: 'Sunday Message',
-      Link: '/mission',
+      Link: '/Sunday',
     },
   ],
 };
