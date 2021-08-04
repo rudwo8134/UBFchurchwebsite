@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import image from '../../source/church7.jpg'
@@ -11,7 +11,10 @@ import {AiOutlineLock} from 'react-icons/ai'
 
 // 
 import { connect } from 'react-redux'
-import { GoogleSignInStart } from '../../Redux/User/User.action'
+import {
+  GoogleSignInStart,
+  EmailSignInStart,
+} from '../../Redux/User/User.action';
 
 const LoginContainer = styled.div`
   width: 100vw;
@@ -83,7 +86,7 @@ const LoginBoxRight = styled.div`
     height: 150px;
   }
 `;
-const Loginformcontainer = styled.div`
+const Loginformcontainer = styled.form`
   height: 30%;
   display: flex;
   flex-direction: column;
@@ -163,24 +166,52 @@ const Googlemark = styled(FcGoogle)`
 
 
 const Login = (props) => {
-  const { GoogleSignInStart } = props;
+  const { GoogleSignInStart,EmailSignInStart } = props;
+
+  const [logincredential, setlogincredential] = useState({
+    email: '',
+    password: '',
+  });
+
+const handleLoginChange = (e) => {
+  const { name, value } = e.target;
+  setlogincredential({ ...logincredential, [name]: value });
+};
+
+  const handleloginSubmit = async (event) => {
+    event.preventDefault();
+    const { email, password } = logincredential;
+    EmailSignInStart({email, password});
+  };
   return (
     <LoginContainer>
       <Loginbox>
         <LoginBoxLeft>
-          <Loginformcontainer>
+          <Loginformcontainer onSubmit={handleloginSubmit}>
             <h1>Sign In</h1>
             <div>
-              <label htmlFor="Email">
+              <label htmlFor="email">
                 <FaUserCircle />
               </label>
-              <input type="email" name="Email" placeholder="Email" />
+              <input
+                onChange={handleLoginChange}
+                value={logincredential.email}
+                type="email"
+                name="email"
+                placeholder="Email"
+              />
             </div>
             <div>
               <label htmlFor="password">
                 <AiOutlineLock />
               </label>
-              <input type="password" name="password" placeholder="Password" />
+              <input
+                onChange={handleLoginChange}
+                value={logincredential.password}
+                type="password"
+                name="password"
+                placeholder="Password"
+              />
             </div>
             <button type="submit">Login</button>
           </Loginformcontainer>
@@ -201,8 +232,10 @@ const Login = (props) => {
   );
 }
 
-const MapAction = dispatch =>({
-  GoogleSignInStart: () =>dispatch(GoogleSignInStart())
-})
+const MapAction = (dispatch) => ({
+  GoogleSignInStart: () => dispatch(GoogleSignInStart()),
+  EmailSignInStart: (email, password) =>
+    dispatch(EmailSignInStart(email, password)),
+});
 
 export default connect(null, MapAction)(Login);

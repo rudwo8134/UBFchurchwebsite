@@ -12,6 +12,7 @@ const config = {
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_APP_ID,
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
 };
 
 firebase.initializeApp(config);
@@ -42,11 +43,11 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   const userRef = firestore.doc(`users/${userAuth.uid}`);
   const snapShot = await userRef.get();
   if (!snapShot.exists) {
-    const { email, UserName } = userAuth;
+    const { email, displayName } = userAuth;
     const createdAt = new Date();
     try {
       await userRef.set({
-        UserName,
+        displayName,
         email,
         createdAt,
         ...additionalData,

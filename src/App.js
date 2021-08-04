@@ -14,8 +14,6 @@ import { connect } from "react-redux";
 import Signup from "./Pages/Signup";
 function App(props) {
   const {currentUser} = props
-  console.log(currentUser)
-
   return (
     <Fragment>
       <GlobalStyle />
@@ -24,9 +22,11 @@ function App(props) {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route exact path="/register">
-          <Signup/>
-        </Route>
+        <Route
+          exact
+          path="/register"
+          render={() => (!currentUser ? <Signup /> : <Redirect to="/" />)}
+        />
         <Route
           exact
           path="/Sign-in"

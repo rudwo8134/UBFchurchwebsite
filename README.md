@@ -13,3 +13,8 @@ Unfinished : backend part and design
 ## Day2
 
 use the https://bible-api.com/ to get bible data
+
+## Day3
+
+add the login page and login redux.
+I use firestore for backend server

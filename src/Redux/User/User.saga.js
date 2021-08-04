@@ -52,6 +52,14 @@ export function* Signup({ payload: { email, password, displayName } }) {
     yield put(signupFailure(error));
   }
 }
+export function*signinwithemail({payload: {email,password}}){
+  try{
+    const {user} = yield auth.signInWithEmailAndPassword(email,password)
+    yield getSnapshotFromuserauth(user)
+  }catch(error){
+    put(SignInfailure(error));
+  }
+}
 
 export function* signinafter({ payload: { user, additionalData } }) {
   yield getSnapshotFromuserauth(user, additionalData);
@@ -69,6 +77,9 @@ export function* signout() {
 export function* OnGoogleSignInStart(){
   yield takeLatest (action.GOOGLE_SIGN_IN_START, Signinwithgoogleprovider)
 }
+export function* onemailsigninstart() {
+  yield takeLatest(action.EMAIL_SIGN_IN_START, signinwithemail);
+}
 export function*SignUpStart(){
   yield takeLatest (action.CREATE_USER_START, Signup)
 }
@@ -83,8 +94,9 @@ export function* SignOutStart() {
 export function*userSagas(){
   yield all ([
     call(OnGoogleSignInStart),
-    call(SignOutStart),
+    call(onemailsigninstart),
     call(SignUpStart),
     call(signupsuccess),
+    call(SignOutStart),
   ])
 }
