@@ -1,23 +1,21 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-import image from '../../source/church7.jpg'
-import Logo from '../../source/logo2.png'
-import {FcGoogle} from 'react-icons/fc'
-import {FaUserCircle} from 'react-icons/fa'
-import {AiOutlineLock} from 'react-icons/ai'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import image from '../../source/church7.jpg';
+import Logo from '../../source/logo2.png';
+import { FcGoogle } from 'react-icons/fc';
+import { FaUserCircle } from 'react-icons/fa';
+import { AiOutlineLock } from 'react-icons/ai';
 
-
-
-// 
-import { connect } from 'react-redux'
-import { GoogleSignInStart } from '../../Redux/User/User.action'
+//
+import { connect } from 'react-redux';
+import { GoogleSignInStart } from '../../Redux/User/User.action';
 
 const LoginContainer = styled.div`
   width: 100vw;
   height: 100vh;
   position: relative;
-`
+`;
 
 const Loginbox = styled.div`
   width: 1300px;
@@ -32,7 +30,6 @@ const Loginbox = styled.div`
   border-radius: 50px;
 `;
 const LoginBoxLeft = styled.div`
-
   width: 50%;
   height: 100%;
   background: #32323244;
@@ -74,11 +71,11 @@ const LoginBoxRight = styled.div`
   background-position: bottom;
   position: relative;
 
-  img{
+  img {
     position: absolute;
     left: 50%;
     top: 20%;
-    transform: translate(-50%,-20%);
+    transform: translate(-50%, -20%);
     width: 200px;
     height: 150px;
   }
@@ -158,9 +155,7 @@ const Googlemark = styled(FcGoogle)`
   }
 `;
 
-
-
-const Login = (props) => {
+const Register = (props) => {
   const { GoogleSignInStart } = props;
   return (
     <LoginContainer>
@@ -197,10 +192,10 @@ const Login = (props) => {
       </Loginbox>
     </LoginContainer>
   );
-}
+};
 
-const MapAction = dispatch =>({
-  GoogleSignInStart: () =>dispatch(GoogleSignInStart())
-})
+const MapAction = (dispatch) => ({
+  GoogleSignInStart: () => dispatch(GoogleSignInStart()),
+});
 
-export default connect(null, MapAction)(Login);
+export default connect(null, MapAction)(Register);

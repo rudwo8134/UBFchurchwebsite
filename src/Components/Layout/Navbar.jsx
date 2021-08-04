@@ -10,6 +10,17 @@ import { Data} from '../../Data/Nav'
 
 import Button from '../Util/Button'
 
+//current user
+import { createStructuredSelector } from 'reselect';
+import {
+  selectCurrentUser,
+  selectUsername,
+} from '../../Redux/User/User.selector';
+import { connect } from 'react-redux';
+
+// signout
+import { signoutstart } from '../../Redux/User/User.action';
+
 
 const Navbarnav = styled.nav`
   width: 100%;
@@ -99,17 +110,62 @@ const NavbarMenucontainer = styled.div`
 const NavbarMenuLink = styled(Link)``;
 
 const NavbarContactcontainer = styled.div`
+  position: relative;
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
+  h1 {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    font-size: ${({ login }) => (login ? '1.4rem' : '0rem')};
+    text-align: center;
+    font-weight: 400;
+    color: #32323266;
+    span {
+      text-transform: capitalize;
+      color: #323232ff;
+      font-weight: bold;
+      font-size: ${({ login }) => (login ? '1.4rem' : '0rem')};
+    }
+  }
+`;
+const Logouta = styled.button`
+  text-decoration: none;
+  font-weight: 500;
+  text-transform: capitalize;
+  border-radius: 50px;
+  padding: ${({ big }) => (big ? '0 3rem' : '0 1.5rem')};
+  background-color: #d99923;
+  color: #fff;
+  border:none;
+  text-align: center;
+  user-select: none;
+  line-height: 40px;
+  height: 4rem;
+  letter-spacing: ${({ big }) => (big ? '0.2rem' : '0.02rem')};
+
+  width: ${({ big }) => (big ? '16rem' : '12rem')};
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  &:hover {
+    color: #d99923;
+    background-color: #0d0d0d;
+  }
+`;
+const Logouttext = styled.span`
+  margin: 0 auto;
+  font-size: ${({ big }) => (big ? '2.4rem' : '1.8rem')};
 `;
 
 
 
-const Navbar = () => {
+const Navbar = (props) => {
+    const { currentUser, username, signout } = props;
+    console.log(username);
     const { NavMainName, NavSubName, NavAddress, NavMenu } = Data;
     const [navbar, setnavbar] = useState(false)
 
@@ -147,14 +203,34 @@ const Navbar = () => {
             );
           })}
         </NavbarMenucontainer>
-        <NavbarContactcontainer>
-          <Button button="true" link="/Sign-in">
-            Sign-In
-          </Button>
+        <NavbarContactcontainer login={!currentUser ? 'false' : 'true'}>
+          {!currentUser ? (
+            <Button button="true" link="/Sign-in">
+              Sign-In
+            </Button>
+          ) : (
+            <div>
+              <Logouta button="true" onClick={signout}>
+                <Logouttext>sign-out</Logouttext>
+              </Logouta>
+              <h1>
+                Welcome, <span>{currentUser && currentUser.displayName}</span>{' '}
+              </h1>
+            </div>
+          )}
         </NavbarContactcontainer>
       </NavbarContainer>
     </Navbarnav>
   );
 }
 
-export default Navbar;
+const mapstatetoprops = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
+
+const mapaction = (dispatch) => ({
+  signout: ()=> dispatch(signoutstart()),
+});
+
+
+export default connect(mapstatetoprops, mapaction)(Navbar);

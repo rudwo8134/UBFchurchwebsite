@@ -15,7 +15,7 @@ export const EmailSignInStart = (emailpassword) => ({
 });
 
 export const SignInSuccess = (user) => ({
-  type: useraction.SIGN_OUT_SUCCESS,
+  type: useraction.SIGN_IN_SUCCESS,
   payload:user
 })
 

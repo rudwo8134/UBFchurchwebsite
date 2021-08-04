@@ -1,13 +1,20 @@
 import { Fragment } from "react";
 import GlobalStyle from "./GlobalStyle";
-import {Switch, Route} from 'react-router-dom'
+import {Switch, Route, Redirect} from 'react-router-dom'
 import Layout from "./Components/Layout/Layout";
 
 // pages 
 import Home from "./Pages/Home";
 import Signin from "./Pages/Signin";
 
-function App() {
+// current user
+import { createStructuredSelector } from "reselect";
+import {selectCurrentUser} from './Redux/User/User.selector'
+import { connect } from "react-redux";
+function App(props) {
+  const {currentUser} = props
+  console.log(currentUser)
+
   return (
     <Fragment>
       <GlobalStyle />
@@ -16,12 +23,14 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route exact path="/Sign-in">
-          <Signin />
-        </Route>
+        <Route exact path="/Sign-in" render={()=> !currentUser ? (<Signin/>): (<Redirect to="/"/>)}/>
       </Switch>
     </Fragment>
   );
 }
 
-export default App;
+const mapstatetoprops = createStructuredSelector({
+  currentUser: selectCurrentUser
+})
+
+export default connect(mapstatetoprops, null)(App);

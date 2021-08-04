@@ -60,7 +60,7 @@ const Button = (props) => {
       <Buttona to={`${link}`} big={big}>
         <Textcontainer big={big}>
           {children}
-          {Hero && (<Arrow/>)}
+          {Hero && <Arrow />}
         </Textcontainer>
       </Buttona>
     );
