@@ -4,6 +4,7 @@ import Image from '../source/church5.jpg'
 import Button from './Util/Button';
 import { biblename } from '../Data/hero';
 import axios from 'axios';
+import Loadingpage from './Loadingpage';
 
 
 
@@ -93,6 +94,7 @@ const Smoothwrapper = styled.div`
 const Hero = () => {
   const [verse, Setverse] = useState()
   const [num, Setnum]= useState()
+  const [loading, setloading] = useState(true)
 
   
   useEffect(() => {
@@ -110,11 +112,18 @@ const Hero = () => {
         Setverse(
           `${request.data.verses[0].text} ${request.data.verses[1].text}`
         );
+        setloading(false)
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
+
+  if(loading){
+    return(
+      <Loadingpage/>
+    )
+  }
 
   return (
     <HeroContainer>
