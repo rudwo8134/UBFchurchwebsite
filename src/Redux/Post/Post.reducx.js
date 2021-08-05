@@ -1,0 +1,35 @@
+import actiontype from './Post.type'
+
+const INITIAL_STATE = {
+  DATA: null,
+  Error:null,
+  loading:false
+}
+
+const Postreducer = (state=INITIAL_STATE, action)=>{
+  switch (action.type) {
+    case actiontype.POST_SUNDAY_MESSAGE_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case actiontype.POST_SUNDAY_MESSAGE_SUCCESS:
+      return {
+        ...state,
+        data: action.payload,
+        error: null,
+        loading: false,
+      };
+    case actiontype.POST_SUNDAY_MESSAGE_FAILED:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      };
+
+    default:
+      return state;
+  }
+}
+
+export default Postreducer;

@@ -8,6 +8,7 @@ import Loadingpage from './Loadingpage';
 
 
 
+
 const HeroContainer = styled.div`
   width: 100vw;
   height: 100vh;
@@ -117,12 +118,11 @@ const Hero = () => {
       .catch((error) => {
         console.log(error);
       });
+    
   }, []);
 
   if(loading){
-    return(
-      <Loadingpage/>
-    )
+    return <Loadingpage name="Welecome to UBF" type="ThreeDots" />;
   }
 
   return (

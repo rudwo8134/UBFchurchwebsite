@@ -13,3 +13,13 @@ export const selectUsername = createSelector(
   [selectCurrentUser],
   (Currentuser) => Currentuser.displayName
 );
+
+export const selectLoading = createSelector(
+  [selectUser],
+  (selectUser) => selectUser.loading
+);
+
+export const selecterror = createSelector(
+  [selectUser],
+  (selectUser) => selectUser.Error
+);

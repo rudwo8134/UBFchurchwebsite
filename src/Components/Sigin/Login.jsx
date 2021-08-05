@@ -16,6 +16,11 @@ import {
   EmailSignInStart,
 } from '../../Redux/User/User.action';
 
+// setting loading and error
+import { selectLoading, selecterror } from '../../Redux/User/User.selector'
+import { createStructuredSelector } from 'reselect'
+import LoaderComponents from '../Util/Loader'
+
 const LoginContainer = styled.div`
   width: 100vw;
   height: 100vh;
@@ -166,7 +171,7 @@ const Googlemark = styled(FcGoogle)`
 
 
 const Login = (props) => {
-  const { GoogleSignInStart,EmailSignInStart } = props;
+  const { GoogleSignInStart,EmailSignInStart,loading} = props;
 
   const [logincredential, setlogincredential] = useState({
     email: '',
@@ -213,7 +218,11 @@ const handleLoginChange = (e) => {
                 placeholder="Password"
               />
             </div>
-            <button type="submit">Login</button>
+            {loading ? (
+              <LoaderComponents />
+            ) : (
+              <button type="submit">Login</button>
+            )}
           </Loginformcontainer>
           <LoginGooglecontainer>
             <h1>Login with </h1>
@@ -232,10 +241,15 @@ const handleLoginChange = (e) => {
   );
 }
 
+const mapvalue = createStructuredSelector({
+  loading: selectLoading,
+  error: selecterror
+})
+
 const MapAction = (dispatch) => ({
   GoogleSignInStart: () => dispatch(GoogleSignInStart()),
   EmailSignInStart: (email, password) =>
     dispatch(EmailSignInStart(email, password)),
 });
 
-export default connect(null, MapAction)(Login);
+export default connect(mapvalue, MapAction)(Login);

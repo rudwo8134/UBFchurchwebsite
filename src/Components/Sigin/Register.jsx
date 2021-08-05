@@ -7,9 +7,16 @@ import { AiOutlineLock, AiFillLock } from 'react-icons/ai';
 import {BiUserCircle} from 'react-icons/bi'
 import {MdEmail} from 'react-icons/md'
 
+
+
 //
 import { connect } from 'react-redux';
-import { GoogleSignInStart, signupStart } from '../../Redux/User/User.action';
+import { signupStart } from '../../Redux/User/User.action';
+
+// 
+import LoaderComponents from '../Util/Loader';
+import { selectLoading } from '../../Redux/User/User.selector';
+import { createStructuredSelector } from 'reselect';
 
 const LoginContainer = styled.div`
   width: 100vw;
@@ -139,7 +146,7 @@ const Loginformcontainer = styled.form`
 
 
 const Register = (props) => {
-  const {SignupStart} = props
+  const {SignupStart, loading} = props
   const [Usercredential, Setusercredential] = useState({
     email: '',
     confirmpassword: '',
@@ -190,13 +197,25 @@ const handleSubmit = (e) => {
               <label htmlFor="email">
                 <MdEmail />
               </label>
-              <input onChange={handleChange} value={Usercredential.email} type="email" name="email" placeholder="E-mail" />
+              <input
+                onChange={handleChange}
+                value={Usercredential.email}
+                type="email"
+                name="email"
+                placeholder="E-mail"
+              />
             </div>
             <div>
               <label htmlFor="password">
                 <AiOutlineLock />
               </label>
-              <input onChange={handleChange} value={Usercredential.password} type="password" name="password" placeholder="Password" />
+              <input
+                onChange={handleChange}
+                value={Usercredential.password}
+                type="password"
+                name="password"
+                placeholder="Password"
+              />
             </div>
             <div>
               <label htmlFor="confirmpassword">
@@ -210,7 +229,11 @@ const handleSubmit = (e) => {
                 placeholder="Confirm Password"
               />
             </div>
-            <button type="submit">Register</button>
+            {loading ? (
+              <LoaderComponents />
+            ) : (
+              <button type="submit">Register</button>
+            )}
           </Loginformcontainer>
           <span>
             If You already have an account Click to{' '}
@@ -222,9 +245,13 @@ const handleSubmit = (e) => {
   );
 };
 
+const mapvalue = createStructuredSelector({
+  loading: selectLoading
+})
+
 const MapAction = (dispatch) => ({
   SignupStart: (info) => dispatch(signupStart(info)),
 });
 
 
-export default connect(null, MapAction)(Register);
+export default connect(mapvalue, MapAction)(Register);

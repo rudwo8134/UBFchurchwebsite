@@ -2,7 +2,6 @@ import React from 'react'
 import Loader from 'react-loader-spinner';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import styled,{keyframes} from 'styled-components';
-import Image from '../source/church2.jpg'
 
 const animation = keyframes`
 0%{
@@ -40,18 +39,19 @@ const Wrapper = styled.div`
   }
 `;
 
-const Loadingpage = () => {
+const Loadingpage = (props) => {
+  const {name, type} = props
   return (
     <Wrapper>
       <Loader
-        type="ThreeDots"
+        type={`${type}`}
         color="#000000"
         secondaryColor="red"
         height={200}
         width={200}
         timeout={10000}
       />
-      <h1>Welcome to UBF</h1>
+      <h1>{name}</h1>
     </Wrapper>
   );
 }

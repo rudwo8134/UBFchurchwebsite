@@ -1,8 +1,10 @@
+import { useState } from "react";
 import firebase from "firebase/app";
 import 'firebase/firestore';
 import 'firebase/auth';
 import 'firebase/storage';
 import 'firebase/database';
+import axios from "axios";
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -59,3 +61,39 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
   return userRef;
 };
+
+export const CreatePostSundaymessage = async(data) =>{
+  const postRef = firestore.doc(`posts/${data.id}`)
+  const {id,book,verse,start,end,presider,Piano,praiseworship1,silentplayer,specialsong,Message,hymn,praiseworship2,announcement,loardprayler} = data
+
+  try{
+    const data =await axios.get(
+      `https://bible-api.com/${book}+${verse}:${start}-${end}`
+    ).then(request=>{
+      return request.data
+    });
+    const { text, reference } = data;
+    var time = new Date().getTime()
+    var date =new Date(time)
+    await postRef.set({
+      createat: date,
+      id,
+      text,
+      reference,
+      presider,
+      Piano,
+      praiseworship1,
+      silentplayer,
+      specialsong,
+      Message,
+      hymn,
+      praiseworship2,
+      announcement,
+      loardprayler,
+    });
+  }catch(error){
+    return error
+  }
+
+  return postRef
+}
