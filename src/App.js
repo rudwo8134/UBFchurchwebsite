@@ -12,6 +12,7 @@ import { createStructuredSelector } from "reselect";
 import {selectCurrentUser} from './Redux/User/User.selector'
 import { connect } from "react-redux";
 import Signup from "./Pages/Signup";
+import Loadingpage from "./Components/Loadingpage";
 function App(props) {
   const {currentUser} = props
   return (
