@@ -1,9 +1,11 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import styled from 'styled-components'
 import {FaBible} from 'react-icons/fa'
 import {CgPiano} from 'react-icons/cg'
 import ubf from '../source/ubf.png'
 import { Data } from '../Data/Info'
+import { firestore } from '../Firebase/util'
+import Loader from 'react-loader-spinner'
 
 
 const InfoContainer = styled.section`
@@ -176,19 +178,52 @@ const InfoEtransfer = styled.h2`
 
 
 const Info = () => {
+  const [data,setdata]=useState()
+  const [loading,setloading] =useState(false)
+  useEffect(() => {
+    const lol = async () => {
+
+      try {
+        setloading(true);
+        const dataref = await firestore
+          .collection('posts')
+          .orderBy('createat', 'desc')
+          .limit(1);
+        const snapshot = await dataref.get();
+        snapshot.forEach((data) => {
+          setdata(data.data())
+        });
+        setloading(false)
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    lol();
+  }, []);
+
+  function endOfWeek(date) {
+    var lastday = date.getDate() - (date.getDay() - 1) + 6;
+    return new Date(date.setDate(lastday));
+  }
+  var dt = new Date();
+  var weekend = endOfWeek(dt).toString().slice(0,15);
+ 
+
+  if(loading){
+    <Loader/>
+  }
+
   return (
     <InfoContainer>
       <InfoHeader>Brochure for this week</InfoHeader>
       <InfoBookContainer>
         <InfoBookLeft>
           <InfoLeftHeader>He Has Rescued us</InfoLeftHeader>
-          <InfoLeftDate>Aug 1 2021</InfoLeftDate>
+          <InfoLeftDate>{weekend}</InfoLeftDate>
           <InfoPassagecontainer>
             <p>
-              <span>Colossians 1:1 - 14</span>
-              13 For he has rescued us from the dominion of darkness and brought
-              us into the kingdom of the Son he loves, 14 in whom we have
-              redemption, the forgiveness of sins.
+              <span>{data && data.reference}</span>
+              {data && data.text}
             </p>
           </InfoPassagecontainer>
           <InfoLogoBookleft>
@@ -218,7 +253,7 @@ const Info = () => {
                 }}
               ></FaBible>
               Presider:
-              <span>Daniel Kim</span>
+              <span>{data && data.presider}</span>
             </h1>
             <h1>
               <CgPiano
@@ -229,20 +264,51 @@ const Info = () => {
                 }}
               />
               Piano:
-              <span>Hannah Kwak</span>
+              <span>{data && data.Piano}</span>
             </h1>
           </InfoBookName>
           <InfoTimewrapeer>
             <InfoTimewrapeerul>
-              {Data.map((topics, index) => {
-                const { topic, name } = topics;
-                return (
-                  <InfoTimewrapeerli key={index}>
-                    {index + 1}. {topic}
-                    <span>{name}</span>
-                  </InfoTimewrapeerli>
-                );
-              })}
+              <InfoTimewrapeerli>
+                1.Praise and Worship
+                <span>{data && data.praiseworship1}</span>
+              </InfoTimewrapeerli>
+              <InfoTimewrapeerli>
+                2.Silent prayer
+                <span>{data && data.silentplayer}</span>
+              </InfoTimewrapeerli>
+              <InfoTimewrapeerli>
+                3.Representative prayer
+                <span>{data && data.represetativeplayer}</span>
+              </InfoTimewrapeerli>
+              <InfoTimewrapeerli>
+                4.Passage reading
+                <span>{data && data.passagereading}</span>
+              </InfoTimewrapeerli>
+              <InfoTimewrapeerli>
+                5.Special Song
+                <span>{data && data.specialsong}</span>
+              </InfoTimewrapeerli>
+              <InfoTimewrapeerli>
+                6.Message
+                <span>{data && data.Message}</span>
+              </InfoTimewrapeerli>
+              <InfoTimewrapeerli>
+                7.Hymn(Offering)
+                <span>{data && data.hymn}</span>
+              </InfoTimewrapeerli>
+              <InfoTimewrapeerli>
+                8.Praise and Worship
+                <span>{data && data.praiseworship2}</span>
+              </InfoTimewrapeerli>
+              <InfoTimewrapeerli>
+                9.Announcements & prayer topics
+                <span>{data && data.announcement}</span>
+              </InfoTimewrapeerli>
+              <InfoTimewrapeerli>
+                9.Lord’s prayer
+                <span>{data && data.loardprayler}</span>
+              </InfoTimewrapeerli>
             </InfoTimewrapeerul>
           </InfoTimewrapeer>
           <InfoEtransfer>

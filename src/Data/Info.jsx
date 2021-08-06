@@ -1,42 +1,42 @@
 export const Data = [
   {
-    topic: 'Praise and Worship',
+    topic: '',
     name: 'John Lee',
   },
   {
-    topic: 'Silent prayer',
+    topic: '',
     name: 'John Lee',
   },
   {
-    topic: 'Representative prayer',
+    topic: '',
     name: 'John Lee',
   },
   {
-    topic: 'Passage reading',
+    topic: '',
     name: 'John Lee',
   },
   {
-    topic: 'Special Song',
+    topic: '',
     name: 'John Lee',
   },
   {
-    topic: 'Message',
+    topic: '',
     name: 'John Lee',
   },
   {
-    topic: 'Hymn(Offering)',
+    topic: '',
     name: 'John Lee',
   },
   {
-    topic: 'Praise and Worship',
+    topic: '',
     name: 'John Lee',
   },
   {
-    topic: 'Announcements & prayer topics',
+    topic: '',
     name: 'John Lee',
   },
   {
-    topic: 'Lord’s prayer',
+    topic: '',
     name: 'John Lee',
   },
 ];

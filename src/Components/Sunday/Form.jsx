@@ -88,6 +88,8 @@ const SundayForm = (props) => {
     Piano: "",
     praiseworship1: "",
     silentplayer: "",
+    represetativeplayer:"",
+    passagereading:"",
     specialsong: "",
     Message: "",
     hymn: "",
@@ -178,6 +180,24 @@ const SundayForm = (props) => {
               name="silentplayer"
               value={data.silentplayer}
               placeholder="SilentPrayer"
+            ></input>
+          </div>
+          <div>
+            <label htmlFor="represetativeplayer">Representative Prayer</label>
+            <input
+              onChange={handleChange}
+              name="represetativeplayer"
+              value={data.represetativeplayer}
+              placeholder="Representative Prayer"
+            ></input>
+          </div>
+          <div>
+            <label htmlFor="passagereading">Passage reading</label>
+            <input
+              onChange={handleChange}
+              name="passagereading"
+              value={data.passagereading}
+              placeholder="Passage reading"
             ></input>
           </div>
           <div>

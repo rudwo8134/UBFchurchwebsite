@@ -64,7 +64,25 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
 export const CreatePostSundaymessage = async(data) =>{
   const postRef = firestore.doc(`posts/${data.id}`)
-  const {id,book,verse,start,end,presider,Piano,praiseworship1,silentplayer,specialsong,Message,hymn,praiseworship2,announcement,loardprayler} = data
+  const {
+    passagereading,
+    represetativeplayer,
+    id,
+    book,
+    verse,
+    start,
+    end,
+    presider,
+    Piano,
+    praiseworship1,
+    silentplayer,
+    specialsong,
+    Message,
+    hymn,
+    praiseworship2,
+    announcement,
+    loardprayler,
+  } = data;
 
   try{
     const data =await axios.get(
@@ -72,13 +90,20 @@ export const CreatePostSundaymessage = async(data) =>{
     ).then(request=>{
       return request.data
     });
+
     const { text, reference } = data;
-    var time = new Date().getTime()
-    var date =new Date(time)
+    var now = new Date()
+    var time = now.getTime()
+    var date =new Date(time).toString()
+    var lastday = now.getDate() - (now.getDay() - 1) + 6;
+    var weekend = new Date(now.setDate(lastday))
     await postRef.set({
+      weekend,
       createat: date,
       id,
       text,
+      passagereading,
+      represetativeplayer,
       reference,
       presider,
       Piano,

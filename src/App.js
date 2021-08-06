@@ -15,23 +15,12 @@ import { connect } from "react-redux";
 import Signup from "./Pages/Signup";
 
 import { firestore } from "./Firebase/util";
+import Sundaylist from "./Pages/Sundaylist";
 
 
 
 function App(props) {
-  useEffect(()=>{
-
-    const lol = async() =>{
-        try {
-          const dataref = await firestore.collection('posts');
-          const snapshot = await dataref.get()
-          console.log(snapshot)
-        } catch (error) {
-          console.log(error);
-        }
-    }
-    lol();
-  },[])
+ 
   const {currentUser} = props
   return (
     <Fragment>
@@ -42,6 +31,9 @@ function App(props) {
           <Home />
         </Route>
         <Route exact path="/sunday">
+          <Sundaylist/>
+        </Route>
+        <Route exact path="/sunday/post">
           <Sunday />
         </Route>
         <Route
