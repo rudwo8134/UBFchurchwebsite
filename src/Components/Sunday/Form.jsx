@@ -3,11 +3,13 @@ import styled from 'styled-components';
 import { biblename } from '../../Data/hero';
 import {v4 as uuid} from 'uuid'
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router';
 import { postsundaystart } from '../../Redux/Post/post.action';
 import { createStructuredSelector } from 'reselect';
 import { selecterror } from '../../Redux/Post/Post.Selector';
 import { selectloading } from '../../Redux/Post/Post.Selector';
-import { firestore } from '../../Firebase/util';
+import Loader from 'react-loader-spinner';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -73,10 +75,10 @@ const Form = styled.form`
   }
 `;
 
+
 const SundayForm = (props) => {
   const {error, loading, postStart} =props
-
-  console.log(loading)
+  const history =useHistory();
   const id = uuid()
   const [data, setdata] = useState({
     id: id,
@@ -105,8 +107,9 @@ const SundayForm = (props) => {
   const handlesubmit = async (e)=>{
     e.preventDefault()
     postStart(data)
-    
+    history.push("/Sunday")
   }
+
   return (
     <Wrapper>
       <Main>
@@ -254,7 +257,18 @@ const SundayForm = (props) => {
               placeholder="Lordsprayer"
             ></input>
           </div>
-          <button type="submit">upload</button>
+          {loading ? (
+              <Loader
+                type="TailSpin"
+                color="black"
+                secondaryColor="red"
+                height={50}
+                width={50}
+                timeout={10000}
+              />
+          ) : (
+            <button type="submit">upload</button>
+          )}
         </Form>
       </Main>
     </Wrapper>
