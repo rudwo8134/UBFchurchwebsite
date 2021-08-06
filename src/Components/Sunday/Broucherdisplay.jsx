@@ -1,12 +1,10 @@
-import React,{useEffect,useState} from 'react'
-import styled from 'styled-components'
-import {FaBible} from 'react-icons/fa'
-import {CgPiano} from 'react-icons/cg'
-import ubf from '../source/ubf.png'
-import { firestore } from '../Firebase/util'
-import Loader from 'react-loader-spinner'
-
-
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { FaBible } from 'react-icons/fa';
+import { CgPiano } from 'react-icons/cg';
+import ubf from '../../source/ubf.png';
+import { firestore } from '../../Firebase/util';
+import Loader from 'react-loader-spinner';
 
 
 const InfoContainer = styled.section`
@@ -16,8 +14,9 @@ const InfoContainer = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
+`;
 const InfoHeader = styled.h1`
+  margin-top: 6rem;
   font-size: 3.2rem;
   color: #105aa8;
   font-weight: bold;
@@ -33,32 +32,34 @@ const InfoBookContainer = styled.div`
   display: flex;
   border-radius: 30px;
   box-shadow: 0 0.1rem 1.5rem black;
-  background-image: linear-gradient(rgba(40,40,40,0.1), rgba(233,233,233,0.4));
+  background-image: linear-gradient(
+    rgba(40, 40, 40, 0.1),
+    rgba(233, 233, 233, 0.4)
+  );
   background-repeat: none;
   background-size: cover;
-
-`
+`;
 const InfoBookLeft = styled.div`
-  width:50%;
-  height:100%;
+  width: 50%;
+  height: 100%;
   border-right: 5px solid white;
-  `
+`;
 const InfoLeftHeader = styled.h1`
-  margin:3rem;
+  margin: 3rem;
   text-transform: uppercase;
   font-size: 2.4rem;
-  text-align:center;
+  text-align: center;
   font-weight: bold;
   letter-spacing: 0.3rem;
-`
+`;
 const InfoLeftDate = styled.h3`
   text-transform: capitalize;
   font-size: 1.6rem;
   text-align: end;
-  margin:3rem;
+  margin: 3rem;
   margin-bottom: 1rem;
   letter-spacing: 0.1rem;
-`; 
+`;
 const InfoPassagecontainer = styled.div`
   padding: 3rem;
   p {
@@ -147,10 +148,10 @@ const InfoBookName = styled.div`
       text-transform: capitalize;
     }
   }
-`
+`;
 const InfoTimewrapeer = styled.div`
   padding: 3rem;
-`
+`;
 const InfoTimewrapeerul = styled.ul`
   list-style: none;
 `;
@@ -175,48 +176,63 @@ const InfoEtransfer = styled.h2`
     font-weight: bold;
   }
 `;
+const Wrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+`
 
 
+const Broucherdisplay = ({
+  match: {
+    params: { id },
+  },
+}) => {
+  const [data, setdata] = useState();
+  const [loading, setloading] = useState(false);
 
-const Info = () => {
-  const [data,setdata]=useState()
-  const [loading,setloading] =useState(false)
   useEffect(() => {
     const lol = async () => {
-
       try {
         setloading(true);
         const dataref = await firestore
-          .collection('posts')
-          .orderBy('createat', 'asc')
-          .limit(1);
+          .collection('posts').doc(`${id}`)
         const snapshot = await dataref.get();
-        snapshot.forEach((data) => {
-          setdata(data.data())
-        });
-        setloading(false)
+        await setdata(snapshot.data());
+        setloading(false);
       } catch (error) {
         console.log(error);
       }
     };
     lol();
-  }, []);
+  }, [id]);
+    function endOfWeek(date) {
+      var lastday = date.getDate() - (date.getDay() - 1) + 6;
+      return new Date(date.setDate(lastday));
+    }
+    var dt = new Date();
+    var weekend = endOfWeek(dt).toString().slice(0, 15);
 
-  function endOfWeek(date) {
-    var lastday = date.getDate() - (date.getDay() - 1) + 6;
-    return new Date(date.setDate(lastday));
-  }
-  var dt = new Date();
-  var weekend = endOfWeek(dt).toString().slice(0,15);
- 
+    if (loading) {
+      return (
+        <Wrapper>
+          <Loader
+            type="TailSpin"
+            color="black"
+            secondaryColor="red"
+            height={100}
+            width={100}
+            timeout={10000}
+          />
+        </Wrapper>
+      );
+    }
 
-  if(loading){
-    <Loader/>
-  }
-
-  return (
-    <InfoContainer>
-      <InfoHeader>Brochure for this week</InfoHeader>
+  return (<InfoContainer>
+      <InfoHeader>Brochure</InfoHeader>
       <InfoBookContainer>
         <InfoBookLeft>
           <InfoLeftHeader>He Has Rescued us</InfoLeftHeader>
@@ -320,19 +336,6 @@ const Info = () => {
       </InfoBookContainer>
     </InfoContainer>
   );
-}
+};
 
-// -----------------------------------------------All together
-// -----------------(piano #343 “Just As I am”) --------------All together
-//  -------------------------#17--------------------------------All together
-// --------------------------------------------------------Daniel Kim
-// ---------------- Colossians 1:1-14 ----------------------All together
-//  --------------------------------------------------------Daniel/Daniella Kim
-//  ------------------------------------------------------------------------Elijah Kim
-//  ---------------------------#85------------------------------All together
-// E-transferred to scarboroughubf1335@gmail.com or offering box
-// ------------------------------------------------------------Daniel Kim
-// --------------------------------------------Isaac Kim
-//  ------------------------------------------------------------------All
-
-export default Info
+export default Broucherdisplay;

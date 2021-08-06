@@ -18,3 +18,6 @@ use the https://bible-api.com/ to get bible data
 
 add the login page and login redux.
 I use firestore for backend server
+add the post page and list page
+add the loading page
+and fix the bug(date was not string when get the data from firebase)

@@ -14,8 +14,10 @@ import {selectCurrentUser} from './Redux/User/User.selector'
 import { connect } from "react-redux";
 import Signup from "./Pages/Signup";
 
-import { firestore } from "./Firebase/util";
+
 import Sundaylist from "./Pages/Sundaylist";
+import Broucherdisplay from "./Components/Sunday/Broucherdisplay";
+import Biblestudy from "./Pages/Biblestudy";
 
 
 
@@ -31,10 +33,18 @@ function App(props) {
           <Home />
         </Route>
         <Route exact path="/sunday">
-          <Sundaylist/>
+          <Sundaylist />
         </Route>
         <Route exact path="/sunday/post">
           <Sunday />
+        </Route>
+        <Route
+          exact
+          path="/sunday/:id"
+          render={({ match }) => <Broucherdisplay match={match} />}
+        ></Route>
+        <Route exact path="/bible">
+          <Biblestudy/>
         </Route>
         <Route
           exact

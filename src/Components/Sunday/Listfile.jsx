@@ -133,7 +133,7 @@ const Listfile = () => {
 
   return (
     <Wrapper>
-        <Button button link="/Sunday/post">
+        <Button button link="/sunday/post">
           Post
         </Button>
 
@@ -147,7 +147,7 @@ const Listfile = () => {
             console.log(weekenddate);
             return (
               <ListContainer key={id}>
-                <Link to={`/Sunday/${id}`}>
+                <Link to={`/sunday/${id}`}>
                   <Imagecontainer>
                     <img src={image} alt="random" />
                   </Imagecontainer>
