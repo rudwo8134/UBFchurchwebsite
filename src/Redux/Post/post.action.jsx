@@ -14,3 +14,18 @@ export const postsundayfailed = (error) => ({
   type: Postaction.POST_SUNDAY_MESSAGE_FAILED,
   payload:error
 });
+
+export const postbiblestart = (data) => ({
+  type: Postaction.POST_BIBLE_MESSAGE_START,
+  payload: data,
+});
+
+export const postbibleSuccess = (data) => ({
+  type: Postaction.POST_BIBLE_MESSAGE_SUCCESS,
+  payload: data,
+});
+
+export const postbiblefailed = (error) => ({
+  type: Postaction.POST_BIBLE_MESSAGE_FAILED,
+  payload: error,
+});

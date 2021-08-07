@@ -6,6 +6,10 @@ import { FcLike } from 'react-icons/fc';
 import { FaCommentAlt, FaRegCommentAlt } from 'react-icons/fa';
 import {GoThumbsup} from 'react-icons/go'
 
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from '../../Redux/User/User.selector';
+
 const Wrapper = styled.div`
   width: 100vw;
   padding-top: 10vh;
@@ -105,6 +109,7 @@ const Likecontainer = styled.div`
       background: none;
       letter-spacing: 0.3rem;
       transition: all 0.3s ease-in-out;
+      border-radius: 30px;
       &:hover{
         cursor: pointer;
         background: #f9f9f9;
@@ -158,14 +163,51 @@ const ProfileCommenttweet = styled.div`
     line-height: 1.333;
   }
 `;
+const CommentInputContainer = styled.form`
+  margin-top: 2rem;
+  padding: 1rem 0rem;
+  border-top: 2px solid #60676e33;
+  border-bottom: 2px solid #60676e33;
+  display: flex;
+  align-items: center;
+  button{
+    box-sizing: border-box;
+    border:none;
+    border-radius: 30px;
+    font-size: 1.5rem;
+    margin-left: 1rem;
+    padding:1rem;
+    background:#1877f2;
+    color:white;
+    text-transform: capitalize;
+    letter-spacing: 0.14rem;
+    transition: all 0.3s ease-in-out;
+    &:hover{
+      cursor: pointer;
+      background: black;
+    }
+  }
+`;
+const CommmentInput = styled.input`
+  box-sizing: border-box;
+  margin-left: 1rem;
+  height: 20px;
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  background: #f0f2f5;
+  border-radius: 30px;
+  font-size: 1.5rem;
+`;
 
 
 
-const BibleStudyform = () => {
+const BibleStudyform = (props) => {
+  const {user} = props
   return (
     <Wrapper>
       <Contentscontainer>
-        <Postform image={image} />
+        <Postform image={image} user={user} />
         <Contents>
           <Profilecontainer>
             <ProfileImage src={image} alt="lol" />
@@ -252,6 +294,11 @@ const BibleStudyform = () => {
                 </div>
               </ProfileCommenttweet>
             </Commentshow>
+            <CommentInputContainer>
+              <ProfileImage2 src={image} alt="logo" />
+              <CommmentInput placeholder="update you state"></CommmentInput>
+              <button>Post</button>
+            </CommentInputContainer>
           </CommentlistContainer>
         </Contents>
       </Contentscontainer>
@@ -259,4 +306,8 @@ const BibleStudyform = () => {
   );
 }
 
-export default BibleStudyform
+const maptoprops = createStructuredSelector({
+  user: selectCurrentUser
+})
+
+export default connect(maptoprops,null)(BibleStudyform);

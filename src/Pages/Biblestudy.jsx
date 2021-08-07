@@ -1,7 +1,7 @@
 import React from 'react'
 import BibleStudyform from '../Components/BibleStudy/BibleStudyform'
 
-const Biblestudy = () => {
+const Biblestudy = ({}) => {
   return (
     <BibleStudyform/>
   )

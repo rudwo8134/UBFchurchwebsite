@@ -2,6 +2,6 @@ import { createSelector } from "reselect";
 
 const selectPost = (state) => state.post
 
-export const selectdata = createSelector([selectPost], (post) => post.DATA);
-export const selecterror = createSelector([selectPost], (post) => post.Error);
-export const selectloading = createSelector([selectPost], (post) => post.loading);
+export const selecposttdata = createSelector([selectPost], (post) => post.DATA);
+export const selectposterror = createSelector([selectPost], (post) => post.Error);
+export const selectpostloading = createSelector([selectPost], (post) => post.loading);

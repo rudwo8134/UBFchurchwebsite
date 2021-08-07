@@ -5,6 +5,7 @@ import 'firebase/auth';
 import 'firebase/storage';
 import 'firebase/database';
 import axios from "axios";
+import { v4 as uuid } from "uuid";
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -61,6 +62,35 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
   return userRef;
 };
+
+export const getcurrentuser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
+};
+export const Createpostbible = async(data)=>{
+  const id = uuid()
+  const bibleref = firestore.doc(`bibles/${id}`)
+ 
+  const {text, user} = data
+  var now = new Date();
+  var time = now.getTime();
+  var date = new Date(time).toString();
+
+  try{
+    await bibleref.set({
+      text,
+      user,
+      date,
+      id
+    })
+  }catch(error){
+    console.log(error)
+  }
+}
 
 export const CreatePostSundaymessage = async(data) =>{
   const postRef = firestore.doc(`posts/${data.id}`)

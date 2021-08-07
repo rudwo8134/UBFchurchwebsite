@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
 import { postsundaystart } from '../../Redux/Post/post.action';
 import { createStructuredSelector } from 'reselect';
-import { selecterror } from '../../Redux/Post/Post.Selector';
-import { selectloading } from '../../Redux/Post/Post.Selector';
+import { selectposterror } from '../../Redux/Post/Post.Selector';
+import { selectpostloading } from '../../Redux/Post/Post.Selector';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
@@ -275,8 +275,8 @@ const SundayForm = (props) => {
   );}
 
 const mapselect = createStructuredSelector({
-  error: selecterror,
-  loading: selectloading
+  error: selectposterror,
+  loading: selectpostloading
 });
 
 const mapaction = dispatch => ({

@@ -4,6 +4,7 @@ import {
   auth,
   googleprovider,
   createUserProfileDocument,
+  getcurrentuser
 } from '../../Firebase/util';
 import {
   checkUsersession,
@@ -74,6 +75,16 @@ export function* signout() {
   }
 }
 
+export function* isUserauthenicated() {
+  try {
+    const userAuth = yield getcurrentuser();
+    if (!userAuth) return;
+    yield getSnapshotFromuserauth(userAuth);
+  } catch (error) {
+    yield put(SignInfailure(error));
+  }
+}
+
 export function* OnGoogleSignInStart(){
   yield takeLatest (action.GOOGLE_SIGN_IN_START, Signinwithgoogleprovider)
 }
@@ -91,6 +102,10 @@ export function* SignOutStart() {
   yield takeLatest(action.SIGN_OUT_START, signout);
 }
 
+export function* checkUsersettion() {
+  yield takeLatest(action.CHECK_USER_SESSION, isUserauthenicated);
+}
+
 export function*userSagas(){
   yield all ([
     call(OnGoogleSignInStart),
@@ -98,5 +113,6 @@ export function*userSagas(){
     call(SignUpStart),
     call(signupsuccess),
     call(SignOutStart),
+    call(checkUsersettion)
   ])
 }

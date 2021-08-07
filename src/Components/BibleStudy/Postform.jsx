@@ -1,5 +1,11 @@
-import React from 'react'
+import React,{useState} from 'react'
 import styled from 'styled-components';
+
+import { connect } from 'react-redux';
+import { postbiblestart } from '../../Redux/Post/post.action';
+import { createStructuredSelector } from 'reselect';
+import {selectpostloading} from '../../Redux/Post/Post.Selector'
+import Loader from 'react-loader-spinner';
 
 const Contents = styled.div`
   margin: 3rem auto;
@@ -61,21 +67,59 @@ const Button = styled.button`
     color: #333333ff;
   }
 `;
+const Centercontainer = styled.div`
+  display: flex;
+  justify-content: center;
 
-const Postform = ({image}) => {
+`
+
+const Postform = ({ image, user, submit, loading }) => {
+  const [data, setdata] = useState({
+    text: '',
+    user: user.displayName,
+  });
+  const handlechange = (e) => {
+    const { name, value } = e.target;
+    setdata({ ...data, [name]: value });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    submit(data);
+  };
+
   return (
     <Contents>
       <Contentstitle> Upload Post</Contentstitle>
       <Profilecontainer>
         <ProfileImage src={image} alt="lol" />
-        <Profilename>Jane Lee</Profilename>
+        <Profilename>{user && user.displayName}</Profilename>
       </Profilecontainer>
-      <TextForm>
-        <TextArea placeholder="What do you think about?"></TextArea>
-        <Button>Post</Button>
+      <TextForm onSubmit={handleSubmit}>
+        <TextArea
+          name="text"
+          onChange={handlechange}
+          placeholder={`What do you think? ${user && user.displayName}`}
+        ></TextArea>
+        {loading ? (
+          <Centercontainer>
+            <Loader type="TailSpin" color="#000000" width={30} height={30} />
+          </Centercontainer>
+        ) : (
+          <Button disabled={loading ? true : false} type="submit">
+            Post
+          </Button>
+        )}
       </TextForm>
     </Contents>
   );
-}
+};
 
-export default Postform
+const mapselect = createStructuredSelector({
+  loading: selectpostloading
+})
+
+const Maptoaction = dispatch =>({
+  submit: (data) =>dispatch(postbiblestart(data))
+})
+
+export default connect(mapselect, Maptoaction)(Postform);

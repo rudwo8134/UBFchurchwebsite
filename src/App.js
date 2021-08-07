@@ -11,6 +11,7 @@ import Sunday from "./Pages/Sunday";
 // current user
 import { createStructuredSelector } from "reselect";
 import {selectCurrentUser} from './Redux/User/User.selector'
+import { checkUsersession } from "./Redux/User/User.action";
 import { connect } from "react-redux";
 import Signup from "./Pages/Signup";
 
@@ -22,8 +23,10 @@ import Biblestudy from "./Pages/Biblestudy";
 
 
 function App(props) {
- 
-  const {currentUser} = props
+    const { currentUser, CheckUserSession } = props;
+  useEffect(() => {
+    CheckUserSession();
+  }, [CheckUserSession]);
   return (
     <Fragment>
       <GlobalStyle />
@@ -65,4 +68,8 @@ const mapstatetoprops = createStructuredSelector({
   currentUser: selectCurrentUser
 })
 
-export default connect(mapstatetoprops, null)(App);
+const mapdispatchtoprops = (dispatch) => ({
+  CheckUserSession: () => dispatch(checkUsersession()),
+});
+
+export default connect(mapstatetoprops, mapdispatchtoprops)(App);
