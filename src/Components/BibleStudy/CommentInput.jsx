@@ -54,11 +54,11 @@ const ProfileImage2 = styled.img`
 const CommentInput = (props) => {
   const {id,users,submit} = props
   const [data, setdata] = useState({
-    id:id,
-    text:"",
-    userid:users.id,
-    username:users.displayName
-  })
+    id: id,
+    text: '',
+    userid: users && users.id,
+    username: users && users.displayName,
+  });
   const handlechange = (e) =>{
     const {name,value} =e.target
     setdata({...data, [name]:value})

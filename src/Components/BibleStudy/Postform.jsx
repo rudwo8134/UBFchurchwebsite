@@ -79,7 +79,7 @@ const Centercontainer = styled.div`
 const Postform = ({ image, user, submit, loading }) => {
   const [data, setdata] = useState({
     text: '',
-    user: user.displayName,
+    user: user && user.displayName,
   });
   const handlechange = (e) => {
     const { name, value } = e.target;

@@ -19,6 +19,7 @@ import Signup from "./Pages/Signup";
 import Sundaylist from "./Pages/Sundaylist";
 import Broucherdisplay from "./Components/Sunday/Broucherdisplay";
 import Biblestudy from "./Pages/Biblestudy";
+import Mission from "./Pages/Mission";
 
 
 
@@ -35,20 +36,29 @@ function App(props) {
         <Route exact path="/">
           <Home />
         </Route>
+        <Route exact path="/mission">
+          <Mission/>
+        </Route>
         <Route exact path="/sunday">
           <Sundaylist />
         </Route>
-        <Route exact path="/sunday/post">
-          <Sunday />
-        </Route>
+        <Route
+          exact
+          path="/sunday/post"
+          render={() => (currentUser ? <Sunday /> : <Redirect to="/Sign-in" />)}
+        ></Route>
         <Route
           exact
           path="/sunday/:id"
           render={({ match }) => <Broucherdisplay match={match} />}
         ></Route>
-        <Route exact path="/bible">
-          <Biblestudy/>
-        </Route>
+        <Route
+          exact
+          path="/bible"
+          render={() =>
+            currentUser ? <Biblestudy /> : <Redirect to="/Sign-in" />
+          }
+        ></Route>
         <Route
           exact
           path="/register"

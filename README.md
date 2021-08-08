@@ -26,3 +26,7 @@ and fix the bug(date was not string when get the data from firebase)
 
 add the Bible Post page and make the design pages.
 add the connection for bible to firestore
+
+## Day5
+
+add the comment create function on Bible page by firebase
