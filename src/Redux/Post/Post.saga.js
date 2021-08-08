@@ -31,7 +31,7 @@ export function*postbibletool({payload}){
 
 export function*postcommenttool({payload}){
   try{
-    // yield call(Createcommentbible, payload)
+    yield call(Createcommentbible, payload)
     yield put (postcommentSuccess(payload))
   }catch(error){
     yield put (postcommentfailed(error))
@@ -51,6 +51,7 @@ export function*PostBiblecommentStart(){
 export function*postSagas(){
   yield all ([
     call(PostSundaystart),
-    call(PostBiblestart)
+    call(PostBiblestart),
+    call(PostBiblecommentStart)
   ])
 }

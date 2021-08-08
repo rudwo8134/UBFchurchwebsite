@@ -1,10 +1,12 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import styled from 'styled-components';
 import image from '../../source/church4.jpg';
 import { FcLike } from 'react-icons/fc';
 import { FaCommentAlt, FaRegCommentAlt } from 'react-icons/fa';
 import { GoThumbsup } from 'react-icons/go';
 import CommentInput from './CommentInput';
+import CommentShowComponents from './Commentshow';
+import { firestore } from '../../Firebase/util';
 
 const Contents = styled.div`
   box-sizing: border-box;
@@ -116,42 +118,28 @@ const CommentsIcons = styled(FaRegCommentAlt)`
 const CommentlistContainer = styled.div`
   padding: 1rem;
 `;
-const Commentshow = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-top: 2rem;
-`;
-const ProfileImage2 = styled.img`
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-`;
-const ProfileCommenttweet = styled.div`
-  box-sizing: border-box;
-  padding: 1.5rem;
-  margin-left: 1rem;
-  background: #f0f2f5;
-  border-radius: 30px;
-  font-weight: 200;
-  span {
-    width: 100%;
-    text-align: start;
-    font-size: 1.3rem;
-    color: #050505;
-    font-weight: bold;
-  }
-  div {
-    margin-top: 0.3rem;
-    color: #050505dd;
-    font-size: 1.5rem;
-    --webkit-font-smoothing: antialiased;
-    line-height: 1.333;
-  }
-`;
+
 
 
 const PostList = ({data}) => {
   const newdate = data.date.slice(0, 21)
+  const [commentdata, setcommentdata] = useState()
+  const [number, setnumbre] =useState()
+  useEffect(()=>{
+
+    const Asyncfuc = async() =>{
+      const {id} = data
+      var alldata = []
+        const dataref = await firestore.collection(`bibles/${id}/comments`).orderBy('date','desc');
+        await dataref.get().then(request=>{
+          request.forEach((doc) =>alldata.push(doc.data()) )
+          setnumbre(alldata.length)
+        })
+        setcommentdata(alldata)
+    }
+    Asyncfuc()
+  
+  },[data])
   return (
     <Contents>
       <Profilecontainer>
@@ -168,7 +156,8 @@ const PostList = ({data}) => {
           34
         </Number>
         <Tweet>
-          <TweetIcon /> 23
+          <TweetIcon />
+          {number}
         </Tweet>
       </NumberContainer>
       <Likecontainer>
@@ -186,55 +175,12 @@ const PostList = ({data}) => {
         </div>
       </Likecontainer>
       <CommentlistContainer>
-        <Commentshow>
-          <ProfileImage2 src={image} alt="logo" />
-          <ProfileCommenttweet>
-            <span>Yesool lee</span>
-            <div>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
-              aperiam dolore labore dolorem culpa doloribus eveniet, quod
-              provident, itaque temporibus, quas dolorum explicabo neque
-              asperiores tempore amet ut porro. Hic. Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Facilis aperiam dolore labore
-              dolorem culpa doloribus eveniet, quod provident, itaque
-              temporibus, quas dolorum explicabo neque asperiores tempore amet
-              ut porro. Hic.
-            </div>
-          </ProfileCommenttweet>
-        </Commentshow>
-        <Commentshow>
-          <ProfileImage2 src={image} alt="logo" />
-          <ProfileCommenttweet>
-            <span>Yesool lee</span>
-            <div>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
-              aperiam dolore labore dolorem culpa doloribus eveniet, quod
-              provident, itaque temporibus, quas dolorum explicabo neque
-              asperiores tempore amet ut porro. Hic. Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Facilis aperiam dolore labore
-              dolorem culpa doloribus eveniet, quod provident, itaque
-              temporibus, quas dolorum explicabo neque asperiores tempore amet
-              ut porro. Hic.
-            </div>
-          </ProfileCommenttweet>
-        </Commentshow>
-        <Commentshow>
-          <ProfileImage2 src={image} alt="logo" />
-          <ProfileCommenttweet>
-            <span>Yesool lee</span>
-            <div>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
-              aperiam dolore labore dolorem culpa doloribus eveniet, quod
-              provident, itaque temporibus, quas dolorum explicabo neque
-              asperiores tempore amet ut porro. Hic. Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Facilis aperiam dolore labore
-              dolorem culpa doloribus eveniet, quod provident, itaque
-              temporibus, quas dolorum explicabo neque asperiores tempore amet
-              ut porro. Hic.
-            </div>
-          </ProfileCommenttweet>
-        </Commentshow>
-        <CommentInput id={data.id}/>
+        {commentdata &&
+          commentdata.map((data) => {
+            return <CommentShowComponents key={data.id} {...data} />;
+          })}
+
+        <CommentInput id={data.id} />
       </CommentlistContainer>
     </Contents>
   );
