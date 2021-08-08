@@ -28,4 +28,19 @@ export const postbibleSuccess = (data) => ({
 export const postbiblefailed = (error) => ({
   type: Postaction.POST_BIBLE_MESSAGE_FAILED,
   payload: error,
+ })
+
+export const postcommentestart = (data) => ({
+  type: Postaction.POST_BIBLE_MESSAGE_COMMENTS_START,
+  payload: data,
+});
+
+export const postcommentSuccess = (data) => ({
+  type: Postaction.POST_BIBLE_MESSAGE_COMMENTS_SUCCESS,
+  payload: data,
+});
+
+export const postcommentfailed = (error) => ({
+  type: Postaction.POST_BIBLE_MESSAGE_COMMENTS_FAILED,
+  payload: error,
 });

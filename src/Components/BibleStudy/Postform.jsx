@@ -6,6 +6,9 @@ import { postbiblestart } from '../../Redux/Post/post.action';
 import { createStructuredSelector } from 'reselect';
 import {selectpostloading} from '../../Redux/Post/Post.Selector'
 import Loader from 'react-loader-spinner';
+import { useHistory } from 'react-router-dom';
+
+
 
 const Contents = styled.div`
   margin: 3rem auto;
@@ -82,11 +85,11 @@ const Postform = ({ image, user, submit, loading }) => {
     const { name, value } = e.target;
     setdata({ ...data, [name]: value });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    submit(data);
+    await submit(data);
+    await setdata({...data, text:''})
   };
-
   return (
     <Contents>
       <Contentstitle> Upload Post</Contentstitle>
@@ -98,6 +101,7 @@ const Postform = ({ image, user, submit, loading }) => {
         <TextArea
           name="text"
           onChange={handlechange}
+          value={data.text}
           placeholder={`What do you think? ${user && user.displayName}`}
         ></TextArea>
         {loading ? (

@@ -71,6 +71,7 @@ export const getcurrentuser = () => {
     }, reject);
   });
 };
+
 export const Createpostbible = async(data)=>{
   const id = uuid()
   const bibleref = firestore.doc(`bibles/${id}`)
@@ -91,6 +92,29 @@ export const Createpostbible = async(data)=>{
     console.log(error)
   }
 }
+
+
+export const Createcommentbible = async (data) => {
+  const id2 = uuid();
+  const bibleref = firestore.doc(`bibles/${data.id}/comments/${id2}`);
+
+  const { text, userid,username, id } = data;
+  var now = new Date();
+  var time = now.getTime();
+  var date = new Date(time).toString();
+
+  try {
+    await bibleref.set({
+      text,
+      userid,
+      date,
+      username,
+      id,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const CreatePostSundaymessage = async(data) =>{
   const postRef = firestore.doc(`posts/${data.id}`)
