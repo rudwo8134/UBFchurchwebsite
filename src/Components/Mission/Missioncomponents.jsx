@@ -3,6 +3,21 @@ import styled from 'styled-components'
 import Logo from '../../source/logo2.png'
 import Image from '../../source/church6.jpg'
 
+import member1 from '../../source/members1.jpg'
+import member2 from '../../source/members2.jpg';
+import member3 from '../../source/members3.jpg';
+import member4 from '../../source/members4.jpg';
+import member5 from '../../source/members5.jpg';
+import member6 from '../../source/members6.jpg';
+import member7 from '../../source/members7.jpg';
+import member8 from '../../source/members8.jpg';
+import member9 from '../../source/members9.jpg';
+import member10 from '../../source/members10.jpg';
+import member11 from '../../source/members11.jpg';
+
+
+
+
 const Wrapper = styled.section`
 width: 100vw;
 height: 100vh;
@@ -94,29 +109,42 @@ align-items: center;
 flex-basis: 200px;
 flex-shrink: 0;
 
+&:hover {
+  span{
+    transform: scale(1.05);
+  }
+  img{
+    transform: scale(1.05);
+    filter: grayscale(0%);
+  }
+}
+
 
 `
-const Staffposition =styled.span`
+const Staffposition = styled.span`
   font-size: 2rem;
   font-weight: bold;
   color: #000000aa;
   text-transform: uppercase;
   margin-top: 1rem;
-`
+  transition: all 0.3s ease-in-out;
+`;
 
 const StaffName = styled.span`
   margin-top: 0.5rem;
   font-size: 1.8rem;
   text-transform: capitalize;
+  transition: all 0.3s ease-in-out;
 `;
 
 const StaffImg = styled.img`
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  margin-top:4rem;
-
-`
+  margin-top: 4rem;
+  filter: grayscale(100%);
+  transition: all 0.3s ease-in-out;
+`;
 
 const Missioncomponents = () => {
   return (
@@ -228,66 +256,71 @@ const Missioncomponents = () => {
             <StaffmemberContainer>
               <StaffImgdiv>
                 <Staffinfowrapper>
-                  <StaffImg src={Image} alt="img" />
+                  <StaffImg src={member4} alt="img" />
                   <Staffposition>Main Paster</Staffposition>
                   <StaffName>Isac Kim</StaffName>
                 </Staffinfowrapper>
               </StaffImgdiv>
               <StaffImgdiv>
                 <Staffinfowrapper>
-                  <StaffImg src={Image} alt="img" />
+                  <StaffImg src={member2} alt="img" />
                   <Staffposition>Main Paster</Staffposition>
                   <StaffName>Isac Kim</StaffName>
                 </Staffinfowrapper>
                 <Staffinfowrapper>
-                  <StaffImg src={Image} alt="img" />
+                  <StaffImg src={member5} alt="img" />
                   <Staffposition>Main Paster</Staffposition>
                   <StaffName>Isac Kim</StaffName>
                 </Staffinfowrapper>
                 <Staffinfowrapper>
-                  <StaffImg src={Image} alt="img" />
+                  <StaffImg src={member1} alt="img" />
+                  <Staffposition>Main Paster</Staffposition>
+                  <StaffName>Isac Kim</StaffName>
+                </Staffinfowrapper>
+                <Staffinfowrapper>
+                  <StaffImg src={member6} alt="img" />
                   <Staffposition>Main Paster</Staffposition>
                   <StaffName>Isac Kim</StaffName>
                 </Staffinfowrapper>
               </StaffImgdiv>
               <StaffImgdiv>
                 <Staffinfowrapper>
-                  <StaffImg src={Image} alt="img" />
+                  <StaffImg src={member3} alt="img" />
                   <Staffposition>Main Paster</Staffposition>
                   <StaffName>Isac Kim</StaffName>
                 </Staffinfowrapper>
                 <Staffinfowrapper>
-                  <StaffImg src={Image} alt="img" />
+                  <StaffImg src={member6} alt="img" />
                   <Staffposition>Main Paster</Staffposition>
                   <StaffName>Isac Kim</StaffName>
                 </Staffinfowrapper>
                 <Staffinfowrapper>
-                  <StaffImg src={Image} alt="img" />
+                  <StaffImg src={member7} alt="img" />
                   <Staffposition>Main Paster</Staffposition>
                   <StaffName>Isac Kim</StaffName>
                 </Staffinfowrapper>
                 <Staffinfowrapper>
-                  <StaffImg src={Image} alt="img" />
+                  <StaffImg src={member8} alt="img" />
                   <Staffposition>Main Paster</Staffposition>
                   <StaffName>Isac Kim</StaffName>
                 </Staffinfowrapper>
                 <Staffinfowrapper>
-                  <StaffImg src={Image} alt="img" />
+                  <StaffImg src={member9} alt="img" />
                   <Staffposition>Main Paster</Staffposition>
                   <StaffName>Isac Kim</StaffName>
                 </Staffinfowrapper>
                 <Staffinfowrapper>
-                  <StaffImg src={Image} alt="img" />
+                  <StaffImg src={member10} alt="img" />
                   <Staffposition>Main Paster</Staffposition>
                   <StaffName>Isac Kim</StaffName>
                 </Staffinfowrapper>
                 <Staffinfowrapper>
-                  <StaffImg src={Image} alt="img" />
+                  <StaffImg src={member11} alt="img" />
                   <Staffposition>Main Paster</Staffposition>
                   <StaffName>Isac Kim</StaffName>
                 </Staffinfowrapper>
                 <Staffinfowrapper>
-                  <StaffImg src={Image} alt="img" />
+                  <StaffImg src={member11} alt="img" />
                   <Staffposition>Main Paster</Staffposition>
                   <StaffName>Isac Kim</StaffName>
                 </Staffinfowrapper>
