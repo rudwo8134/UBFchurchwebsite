@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Logo from '../../source/logo2.png'
+import Image from '../../source/church6.jpg'
 
 const Wrapper = styled.section`
 width: 100vw;
@@ -59,7 +60,7 @@ const WhoweareContainerp = styled.div`
   width: 90%;
   margin: 0 auto;
   background-color: #ffffff;
-  padding: 6rem;
+  padding: 3rem;
   border-radius: 30px;
   line-height: 2.4rem;
   br{
@@ -69,6 +70,53 @@ const WhoweareContainerp = styled.div`
     margin: 2rem;
   }
 `;
+const StaffmemberContainer = styled.div`
+  width: 90%;
+  padding: 3rem;
+  margin: 0 auto;
+`;
+const StaffImgdiv =styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  border-bottom: 1px solid #00000055 ;
+  padding-bottom: 3rem;
+  margin-top: 3rem;
+  flex-wrap: wrap;
+`
+
+const Staffinfowrapper =styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+flex-basis: 200px;
+flex-shrink: 0;
+
+
+`
+const Staffposition =styled.span`
+  font-size: 2rem;
+  font-weight: bold;
+  color: #000000aa;
+  text-transform: uppercase;
+  margin-top: 1rem;
+`
+
+const StaffName = styled.span`
+  margin-top: 0.5rem;
+  font-size: 1.8rem;
+  text-transform: capitalize;
+`;
+
+const StaffImg = styled.img`
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-top:4rem;
+
+`
 
 const Missioncomponents = () => {
   return (
@@ -130,7 +178,121 @@ const Missioncomponents = () => {
               missionaries through us and send them to the ends of the earth (Ac
               1:8).
             </WhoweareContainerp>
-            <WhoweareContainertitle>Staff members at UBF Scarbrough</WhoweareContainertitle>
+            <WhoweareContainertitle>Statement of Faith</WhoweareContainertitle>
+            <WhoweareContainerp>
+              We believe that there is one God in three Persons: God the Father,
+              God the Son, and God the Holy Spirit.
+              <br />
+              We believe that God created the heavens and the earth and all
+              other things in the universe: that He is the Sovereign Ruler of
+              all things; that the Sovereign God reveals Himself; we believe in
+              his redemptive work and in his final judgment.
+              <br />
+              We believe that the Bible is inspired by God; that it is the
+              truth; that it is the final authority in faith and practice.
+              <br />
+              We believe that since the fall of Adam, all people have been under
+              the bondage and power of sin and are deserving of the judgment and
+              wrath of God.
+              <br />
+              We believe that Jesus Christ, who is God and man, through his
+              atoning, sacrificial death on the cross for our sins and his
+              resurrection, is the only way of salvation; he alone saves us from
+              sin and judgment and purifies us from the contamination of the
+              world caused by sin.
+              <br />
+              We believe that Jesus Christ rose from the dead, ascended into
+              heaven and sits at the right hand of God the Father.
+              <br />
+              We believe that regeneration is by the work of the Holy Spirit,
+              and that it is necessary if one is to enter the kingdom of God.
+              <br />
+              We believe that God sent his Holy Spirit to empower his church to
+              witness to Jesus to the ends of the earth.
+              <br />
+              We believe that we are made righteous by grace alone, through
+              faith alone.
+              <br />
+              We believe that the Holy Spirit works in the heart of every
+              believer to lead him.
+              <br />
+              We believe that the church is the body of Christ and that all
+              Christians are members of it.
+              <br />
+              We believe that Jesus will come again in glory to judge the living
+              and the dead.
+            </WhoweareContainerp>
+            <WhoweareContainertitle>
+              Staff members at UBF Scarbrough
+            </WhoweareContainertitle>
+            <StaffmemberContainer>
+              <StaffImgdiv>
+                <Staffinfowrapper>
+                  <StaffImg src={Image} alt="img" />
+                  <Staffposition>Main Paster</Staffposition>
+                  <StaffName>Isac Kim</StaffName>
+                </Staffinfowrapper>
+              </StaffImgdiv>
+              <StaffImgdiv>
+                <Staffinfowrapper>
+                  <StaffImg src={Image} alt="img" />
+                  <Staffposition>Main Paster</Staffposition>
+                  <StaffName>Isac Kim</StaffName>
+                </Staffinfowrapper>
+                <Staffinfowrapper>
+                  <StaffImg src={Image} alt="img" />
+                  <Staffposition>Main Paster</Staffposition>
+                  <StaffName>Isac Kim</StaffName>
+                </Staffinfowrapper>
+                <Staffinfowrapper>
+                  <StaffImg src={Image} alt="img" />
+                  <Staffposition>Main Paster</Staffposition>
+                  <StaffName>Isac Kim</StaffName>
+                </Staffinfowrapper>
+              </StaffImgdiv>
+              <StaffImgdiv>
+                <Staffinfowrapper>
+                  <StaffImg src={Image} alt="img" />
+                  <Staffposition>Main Paster</Staffposition>
+                  <StaffName>Isac Kim</StaffName>
+                </Staffinfowrapper>
+                <Staffinfowrapper>
+                  <StaffImg src={Image} alt="img" />
+                  <Staffposition>Main Paster</Staffposition>
+                  <StaffName>Isac Kim</StaffName>
+                </Staffinfowrapper>
+                <Staffinfowrapper>
+                  <StaffImg src={Image} alt="img" />
+                  <Staffposition>Main Paster</Staffposition>
+                  <StaffName>Isac Kim</StaffName>
+                </Staffinfowrapper>
+                <Staffinfowrapper>
+                  <StaffImg src={Image} alt="img" />
+                  <Staffposition>Main Paster</Staffposition>
+                  <StaffName>Isac Kim</StaffName>
+                </Staffinfowrapper>
+                <Staffinfowrapper>
+                  <StaffImg src={Image} alt="img" />
+                  <Staffposition>Main Paster</Staffposition>
+                  <StaffName>Isac Kim</StaffName>
+                </Staffinfowrapper>
+                <Staffinfowrapper>
+                  <StaffImg src={Image} alt="img" />
+                  <Staffposition>Main Paster</Staffposition>
+                  <StaffName>Isac Kim</StaffName>
+                </Staffinfowrapper>
+                <Staffinfowrapper>
+                  <StaffImg src={Image} alt="img" />
+                  <Staffposition>Main Paster</Staffposition>
+                  <StaffName>Isac Kim</StaffName>
+                </Staffinfowrapper>
+                <Staffinfowrapper>
+                  <StaffImg src={Image} alt="img" />
+                  <Staffposition>Main Paster</Staffposition>
+                  <StaffName>Isac Kim</StaffName>
+                </Staffinfowrapper>
+              </StaffImgdiv>
+            </StaffmemberContainer>
           </WhoweareContainer>
         </IntroWrapper>
       </ContentsWrapper>
